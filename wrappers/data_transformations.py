@@ -2,7 +2,7 @@ from scipy.signal import savgol_filter
 from sklearn.base import BaseEstimator, TransformerMixin
 
 
-# Example implementation of savitzky golay filter
+# Example of savitzky golay filter implementation
 class SavgolWrapper(BaseEstimator, TransformerMixin):
     def __init__(self, win_length=10):
         self.win_length = win_length

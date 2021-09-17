@@ -8,7 +8,7 @@ from base import BaseOptimizer
 from sklearn.metrics import classification_report
 
 
-class Optimizer(BaseOptimizer):
+class OptimizerClassification(BaseOptimizer):
     def __init__(self, model, data_loader, search_method, scoring, mnt, config):
         self.model = model
         self.scoring = scoring
@@ -70,4 +70,36 @@ class Optimizer(BaseOptimizer):
         test_report += f"\n Pred Values:\n {y_pred}"
         return test_report
 
+
+
+class OptimizerRegression(BaseOptimizer):
+    def __init__(self, model, data_loader, search_method, scoring, mnt, config):
+        self.model = model
+        self.scoring = scoring
+        self.mnt = mnt
+        super().__init__(data_loader, search_method, config)
+
+    def _get_model(self, cor):
+        clf_results = cor.cv_results_
+        params = np.array(clf_results["params"])
+        means = clf_results["mean_test_score"]
+
+        if self.mnt == 'min':
+            sort_idx = np.argsort(means)
+        if self.mnt == 'max':
+            sort_idx = np.argsort(means)[::-1]
+
+        params_sorted = params[sort_idx]
+        self.model.set_params(**params_sorted[0]) # define the best model
+        self.model.fit(self.X_train, self.y_train)
+
+        return self.model
+
+    def create_train_report(self, cor):
+        train_report = ""
+        return train_report
+
+    def create_test_report(self, y_test, y_pred):
+        test_report = ""
+        return test_report
 
