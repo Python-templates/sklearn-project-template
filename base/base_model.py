@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from wrappers import methods_dict
+from model import methods_dict
 
 class BaseModel():
 
@@ -12,7 +12,7 @@ class BaseModel():
         steps = list()
         for model_name in pipeline:
             try:
-                steps.append((model_name, methods_dict[model_name]()))
+                steps.append([model_name, methods_dict[model_name]()])
             except:
                 steps.append([model_name, None])
                 # print(f"Key: {mod} not defined in methods_dict.")

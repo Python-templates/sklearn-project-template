@@ -1,0 +1,54 @@
+{
+    "name": "Regression",
+
+    "model": {
+        "type": "Model",
+        "args": {
+            "pipeline": ["scaler", "PCA", "ridge"]
+        }
+    },
+
+    "tuned_parameters":[{
+                        "PCA__n_components": [5,10],
+                        "ridge__solver": ["svd", "cholesky", "lsqr", "sag"],
+                        "ridge__alpha": ["RS", 1e-5, 100],
+                        "ridge__fit_intercept": [true, false]
+                    }],
+
+    "optimizer": "OptimizerRegression",
+
+    "search_method":{
+        "type": "RandomizedSearchCV",
+        "args": {
+            "n_iter": 20,
+            "refit": false,
+            "n_jobs": -1,
+            "verbose": 0
+        }
+    },
+
+    "cross_validation": {
+        "type": "RepeatedKFold",
+        "args": {
+            "n_splits": 5,
+            "n_repeats": 50,
+            "random_state": null
+        }
+    },
+
+    "data_loader": {
+        "type": "Regression",
+        "args":{
+            "data_path": "data/path-to-file",
+            "shuffle": false,
+            "test_split": 0.0,
+            "stratify": false,
+            "random_state":1
+        }
+    },
+
+    "score": "max neg_mean_absolute_error",
+    "test_model": true,
+    "save_dir": "saved/"
+
+}

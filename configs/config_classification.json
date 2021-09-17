@@ -12,7 +12,7 @@
                         "SVC__kernel": ["rbf"],
                         "SVC__gamma": [1e-5, 1e-6, 1],
                         "SVC__C": [1, 100, 1000],
-                        "PLS__n_components": [1,2]
+                        "PLS__n_components": [1,2,3]
                     }],
 
     "optimizer": "OptimizerClassification",

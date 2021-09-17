@@ -109,9 +109,10 @@ class ConfigParser:
             search_method_params['param_grid'] = tuned_parameters
         else:
             for method_name in tuned_parameters[0]:
-                if len(tuned_parameters[0][method_name]) == 2:
+                if len(tuned_parameters[0][method_name]) == 3 and \
+                        tuned_parameters[0][method_name][0] == 'RS':
                     temp = tuned_parameters[0][method_name]
-                    tuned_parameters[0][method_name] = loguniform(temp[0], temp[1])
+                    tuned_parameters[0][method_name] = loguniform(temp[1], temp[2])
             search_method_params['param_distributions'] = tuned_parameters
         return search_method_params
 
