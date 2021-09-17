@@ -139,3 +139,4 @@ dmypy.json
 *.pkl
 config.json
 *.txt
+!requirements.txt
