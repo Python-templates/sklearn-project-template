@@ -1,4 +1,4 @@
-# python-project-template
+# Scikit-learn-project-template
 
 Run classification:
    ```sh
@@ -11,7 +11,9 @@ python main.py -c configs/config_regression.json
 
 Change settings in configs. Good luck!
 
-Odspodi ni več.
+Description follows :)
+
+<!-- Odspodi ni več.
 
 ____________
 
@@ -53,5 +55,5 @@ Set path to project root directory in `.env`, e.g.:
 Set python path in vscode workspace settings, e.g.:
    ```sh
    "python.pythonPath": "C:\\Users\\janezla\\Anaconda3\\envs\\yourenvname\\python"
-   ```
+   ``` -->
 
