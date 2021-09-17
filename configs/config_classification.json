@@ -1,0 +1,51 @@
+{
+    "name": "Classification",
+
+    "model": {
+        "type": "Model",
+        "args": {
+            "pipeline": ["scaler", "PLS", "pf", "SVC"]
+        }
+    },
+
+    "tuned_parameters":[{
+                        "SVC__kernel": ["rbf"],
+                        "SVC__gamma": [1e-5, 1e-6, 1],
+                        "SVC__C": [1, 100, 1000],
+                        "PLS__n_components": [1,2]
+                    }],
+
+    "search_method":{
+        "type": "GridSearchCV",
+        "args": {
+            "refit": false,
+            "n_jobs": -1,
+            "verbose": 0
+        }
+    },
+
+    "cross_validation": {
+        "type": "RepeatedStratifiedKFold",
+        "args": {
+            "n_splits": 5,
+            "n_repeats": 10,
+            "random_state": null
+        }
+    },
+
+    "data_loader": {
+        "type": "Classification",
+        "args":{
+            "data_path": "data/path-to-file",
+            "shuffle": true,
+            "test_split": 0.2,
+            "stratify": true,
+            "random_state":1
+        }
+    },
+
+    "score": "max balanced_accuracy",
+    "test_model": true,
+    "save_dir": "saved/"
+
+}

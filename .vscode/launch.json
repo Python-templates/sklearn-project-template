@@ -12,6 +12,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "cwd": "${workspaceRoot}",
+            "args": ["-c","configs/config_classification.json"]
         },
         {
             "name": "Python: Current File (External Terminal)",
