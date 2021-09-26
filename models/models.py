@@ -6,6 +6,6 @@ class Model(BaseModel):
         steps = self.create_steps(pipeline)
         self.model = Pipeline(steps=steps)
 
-    def get_model(self):
+    def created_model(self):
         return self.model
 

@@ -4,7 +4,7 @@ from models import methods_dict
 class BaseModel():
 
     @abstractmethod
-    def cretated_model(self):
+    def created_model(self):
         '''should return created model'''
         return NotImplementedError
 

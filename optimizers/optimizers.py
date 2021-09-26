@@ -79,7 +79,7 @@ class OptimizerRegression(BaseOptimizer):
         self.mnt = mnt
         super().__init__(data_loader, search_method, config)
 
-    def get_model(self, cor):
+    def fitted_model(self, cor):
         clf_results = cor.cv_results_
         params = np.array(clf_results["params"])
         means = clf_results["mean_test_score"]
