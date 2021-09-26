@@ -22,8 +22,6 @@ To get a local copy up and running follow steps below.
 Create and activate virtual environment:
 ```sh
 conda create -n yourenvname python=3.7
-```
-```sh
 conda activate yourenvname
 ```
 
