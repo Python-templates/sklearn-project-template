@@ -22,7 +22,8 @@
         "args": {
             "refit": false,
             "n_jobs": -1,
-            "verbose": 0
+            "verbose": 2,
+            "error_score": 0
         }
     },
 
@@ -31,7 +32,7 @@
         "args": {
             "n_splits": 5,
             "n_repeats": 10,
-            "random_state": null
+            "random_state": 1
         }
     },
 

@@ -4,15 +4,15 @@ import argparse
 import collections
 from utils import ConfigParser, read_json
 import data_loaders.data_loaders as data_loaders_
-import model.model as model_
-import optimizer.optimizer as optimizer_
+import models.models as models_
+import optimizers.optimizers as optimizers_
 import sklearn.model_selection as model_selection_
 
 
 def main(config):
 
     data_loader = config.init_obj('data_loader', data_loaders_, **{'training':True})
-    model = config.init_obj('model', model_).get_model()
+    model = config.init_obj('model', models_).get_model()
     cross_val = config.init_obj('cross_validation', model_selection_)
     mnt, scoring = config["score"].split()
 
@@ -24,7 +24,7 @@ def main(config):
     search_method_params = config.get_params(search_method_params)
     search_method = config.init_obj('search_method', model_selection_, **search_method_params)
 
-    Optimizer = config.import_module('optimizer', optimizer_)
+    Optimizer = config.import_module('optimizer', optimizers_)
     optim = Optimizer(model=model,
                       data_loader=data_loader,
                       search_method=search_method,

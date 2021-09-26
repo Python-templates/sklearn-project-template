@@ -1,10 +1,10 @@
 from abc import abstractmethod
-from model import methods_dict
+from models import methods_dict
 
 class BaseModel():
 
     @abstractmethod
-    def get_model(self):
+    def cretated_model(self):
         '''should return created model'''
         return NotImplementedError
 

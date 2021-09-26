@@ -36,7 +36,7 @@ class BaseOptimizer():
 
     def optimize(self):
         gs = self._perform_grid_search()
-        model = self.get_model(gs)
+        model = self.fitted_model(gs)
         train_report = self.create_train_report(gs)
         self._save_model(model)
         self.save_report(train_report, "report_train.txt")
@@ -50,8 +50,8 @@ class BaseOptimizer():
         return "Test report not configured."
 
     @abstractmethod
-    def get_model(self, cor):
-        '''Should return fitted model and report'''
+    def fitted_model(self, cor):
+        '''Should return fitted model'''
         raise NotImplementedError
 
 

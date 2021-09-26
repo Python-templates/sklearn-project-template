@@ -3,9 +3,9 @@
 
 from dataclasses import dataclass
 @dataclass
-class DataHanlder:
-    X_data: 'DataHanlder' = None
-    X_data_test: 'DataHanlder' = None
-    y_data: 'DataHanlder' = None
-    y_data_test: 'DataHanlder' = None
-data_handler = DataHanlder()
+class DataHandler:
+    X_data: 'DataHandler' = None
+    X_data_test: 'DataHandler' = None
+    y_data: 'DataHandler' = None
+    y_data_test: 'DataHandler' = None
+data_handler = DataHandler()
