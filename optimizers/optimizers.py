@@ -1,9 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import cv2 as cv2
-import glob
-import os
-import pickle
 from base import BaseOptimizer
 from sklearn.metrics import classification_report, mean_absolute_error
 

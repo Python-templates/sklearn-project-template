@@ -16,6 +16,7 @@ To get a local copy up and running follow steps below.
 ### Requirements
 * Python >= `3.7`
 * Packages included in `requirements.txt` file
+* (Anaconda for easy installation)
 
 ### Install dependencies
 
@@ -25,9 +26,9 @@ conda create -n yourenvname python=3.7
 conda activate yourenvname
 ```
 
-Go to root and install needed dependencies:
+Install packages:
 ```sh
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 ## Folder Structure
