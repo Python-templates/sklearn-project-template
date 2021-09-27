@@ -146,7 +146,7 @@ Config files are in `.json` format. Example of such config is shown below:
 Additional parameters can be added to config file. See `SK-learn` documentation for description of tuned parameters, search method and cross validation. Possible metrics for model evaluation could be found [here](https://scikit-learn.org/stable/modules/model_evaluation.html).
 
 ### Pipeline
-Methods added to config pipeline must be first defined in `models/__init__.py` file. For previous config the following must be added:
+Methods added to config pipeline must be first defined in `models/__init__.py` file. For previous example of config file the following must be added:
 
   ```python
 from wrappers import *
@@ -161,7 +161,7 @@ methods_dict = {
     'SVC':SVC,
 }
   ```
-Majority of algorithms implemented in `SK-learn` library could be directly imported and used. Some algorithm needs some modification before usage. An example is Partial least squares (PLS). Modification is implemented in `wrappers/wrappers.py`. In case you want to implement your own method it can be done as well. An example wrapper for Savitzky golay filter is shown in `wrappers/data_transformations.py`. Implementation must satisfy standard method calls, eg. fit(), tranform() etc.
+Majority of algorithms implemented in `SK-learn` library can be directly imported and used. Some algorithms need a little modification before usage. Such an example is Partial least squares (PLS). Modification is implemented in `wrappers/wrappers.py`. In case you want to implement your own method it can be done as well. An example wrapper for Savitzky golay filter is shown in `wrappers/data_transformations.py`. Implementation must satisfy standard method calls, eg. fit(), tranform() etc.
 
 ## Customization
 
@@ -197,7 +197,7 @@ number of repeats in cross validation option is `('cross_validation', 'args', 'n
 
 * **Usage**
 
-    Loaded data must be assigned to data_handler (dh) in appropriate manner. If dh.X_data_test and dh.y_data_test are not assigned in advance, train/test split could be created by base data loader. In case `"test_split":0.0` is set in config file, whole dataset is used for training. Another option is to assign both train and test sets as shown below. In this case train data will be used for optimization and test data will be used for evaluation of model.
+    Loaded data must be assigned to data_handler (dh) in appropriate manner. If dh.X_data_test and dh.y_data_test are not assigned in advance, train/test split could be created by base data loader. In case `"test_split":0.0` is set in config file, whole dataset is used for training. Another option is to assign both train and test sets as shown below. In this case train data will be used for optimization and test data will be used for evaluation of a model.
 
     ```python
     data_handler.X_data = X_train
@@ -222,7 +222,7 @@ number of repeats in cross validation option is `('cross_validation', 'args', 'n
 
 2. **Implementing abstract methods**
 
-    You need to implement `fitted_model()` which should return fitted model.
+    You need to implement `fitted_model()` which must return fitted model.
     Optionally you can implement format of train/test reports with `create_train_report()` and `create_test_report()`.
 
 * **Example**
@@ -240,24 +240,25 @@ number of repeats in cross validation option is `('cross_validation', 'args', 'n
 
 2. **Implementing abstract methods**
 
-    You need to implement `created_model()` which should return created model.
+    You need to implement `created_model()` which must return created model.
 
 * **Usage**
 
-    Initialization of pipeline methods is performed with `create_steps()`. Steps can be later modified with the use of `change_step()`. An example on how to change a step is shown bellow where Sequential feature selector is added to pipeline.
+    Initialization of pipeline methods is performed with `create_steps()`. Steps can be later modified with the use of `change_step()`. An example on how to change a step is shown bellow where Sequential feature selector is added to the pipeline.
 
     ```python
-    steps = self.create_steps(pipeline)
+    def __init__(self, pipeline):
+        steps = self.create_steps(pipeline)
 
-    rf = RandomForestRegressor(random_state=1)
-    clf = TransformedTargetRegressor(regressor=rf,
-                                    func=np.log1p,
-                                    inverse_func=np.expm1)
-    sfs = SequentialFeatureSelector(clf, n_features_to_select=2, cv=3)
+        rf = RandomForestRegressor(random_state=1)
+        clf = TransformedTargetRegressor(regressor=rf,
+                                        func=np.log1p,
+                                        inverse_func=np.expm1)
+        sfs = SequentialFeatureSelector(clf, n_features_to_select=2, cv=3)
 
-    steps = self.change_step('sfs', sfs, steps)
+        steps = self.change_step('sfs', sfs, steps)
 
-    self.model = Pipeline(steps=steps)
+        self.model = Pipeline(steps=steps)
 
     ```
 
@@ -269,7 +270,7 @@ number of repeats in cross validation option is `('cross_validation', 'args', 'n
 
 ## Roadmap
 
-See the [open issues](https://github.com/janezlapajne/sklearn-project-template/issues) for a list of proposed features (and known issues).
+See [open issues](https://github.com/janezlapajne/sklearn-project-template/issues) to request a feature or report a bug.
 
 ## Contribution
 
@@ -288,8 +289,15 @@ Feel free to contribute any kind of function or enhancement.
 This project is licensed under the MIT License. See  LICENSE for more details.
 
 ## Acknowledgements
-This project is inspired by the project [pytorch-template](https://github.com/victoresque/pytorch-template) by [Victor Huang](https://github.com/victoresque). I would like to confess that some functions, architecture and some parts of readme were directly copied from this repo. But to be honest, what should I do - the project is just simply perfect!
+This project is inspired by the project [pytorch-template](https://github.com/victoresque/pytorch-template) by [Victor Huang](https://github.com/victoresque). I would like to confess that some functions, architecture and some parts of readme were directly copied from this repo. But to be honest, what should I do - the project is absolutely amazing!
 
+## Consider supporting
+
+Do you feel generous today? I am still a student and would make a good use of some extra money :P
+
+
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/janezlapajne)
 
 <!-- Odspodi ni več.
 
