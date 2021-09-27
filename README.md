@@ -207,7 +207,7 @@ number of repeats in cross validation option is `('cross_validation', 'args', 'n
     ```
 * **Example**
 
-  Please refer to `data_loader/data_loaders.py` for data loading example.
+  Please refer to `data_loaders/data_loaders.py` for data loading example.
 
 ### Optimizer
 * **Writing your own optimizer**
@@ -266,7 +266,7 @@ number of repeats in cross validation option is `('cross_validation', 'args', 'n
 
 * **Example**
 
-  Please refer to `model/model.py` model example.
+  Please refer to `models/models.py` model example.
 
 ## Roadmap
 
