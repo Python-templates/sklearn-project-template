@@ -9,6 +9,10 @@
   * `BaseOptimizer` handles execution of grid search, saving and loading of models and formation of test and train reports.
   * `BaseDataLoader` handles splitting of training and testing data. Spilt is performed depending on settings provided in config file.
   * `BaseModel` handles construction of consecutive steps defined in config file.
+* Suitable for tunining of machine learning models which follow `scikit-learn` nomenclature.
+    For the time being tested open libraries:
+  * scikit-learn
+  * sktime
 
 ## Getting Started
 
@@ -143,7 +147,7 @@ Config files are in `.json` format. Example of such config is shown below:
 
 ```
 
-Additional parameters can be added to config file. See `SK-learn` documentation for description of tuned parameters, search method and cross validation. Possible metrics for model evaluation could be found [here](https://scikit-learn.org/stable/modules/model_evaluation.html).
+Additional parameters can be added to config file. See `scikit-learn` documentation for description of tuned parameters, search method and cross validation. Possible metrics for model evaluation could be found [here](https://scikit-learn.org/stable/modules/model_evaluation.html).
 
 ### Pipeline
 Methods added to config pipeline must be first defined in `models/__init__.py` file. For previous example of config file the following must be added:
@@ -161,7 +165,7 @@ methods_dict = {
     'SVC':SVC,
 }
   ```
-Majority of algorithms implemented in `SK-learn` library can be directly imported and used. Some algorithms need a little modification before usage. Such an example is Partial least squares (PLS). Modification is implemented in `wrappers/wrappers.py`. In case you want to implement your own method it can be done as well. An example wrapper for Savitzky golay filter is shown in `wrappers/data_transformations.py`. Implementation must satisfy standard method calls, eg. fit(), tranform() etc.
+Majority of algorithms implemented in `scikit-learn` library can be directly imported and used. Some algorithms need a little modification before usage. Such an example is Partial least squares (PLS). Modification is implemented in `wrappers/wrappers.py`. In case you want to implement your own method it can be done as well. An example wrapper for Savitzky golay filter is shown in `wrappers/data_transformations.py`. Implementation must satisfy standard method calls, eg. fit(), tranform() etc.
 
 ## Customization
 
