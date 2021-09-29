@@ -5,7 +5,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 # Example of savitzky golay filter implementation
 class SavgolWrapper(BaseEstimator, TransformerMixin):
-    def __init__(self, win_length=10, polyorder=2, deriv=0):
+    def __init__(self, win_length=7, polyorder=2, deriv=0):
         self.win_length = win_length
         self.polyorder = polyorder
         self.deriv = deriv
