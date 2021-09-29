@@ -12,7 +12,11 @@ class BaseModel():
         steps = list()
         for model_name in pipeline:
             try:
-                steps.append([model_name, methods_dict[model_name]()])
+                if isinstance(methods_dict[model_name], type):
+                    steps.append((model_name, methods_dict[model_name]()))
+                else:
+                    # if already initialized
+                    steps.append((model_name, methods_dict[model_name]))
             except:
                 steps.append([model_name, None])
                 # print(f"Key: {mod} not defined in methods_dict.")
