@@ -96,7 +96,9 @@ Config files are in `.json` format. Example of such config is shown below:
     "model": {
         "type": "Model",    // model name
         "args": {
-            "pipeline": ["scaler", "PLS", "pf", "SVC"]     // pipeline of methods
+            "pipeline": ["scaler", "PLS", "pf", "SVC"],     // pipeline of methods
+            "unions": {     // unions of methods included in pipeline
+            }
         }
     },
 
@@ -141,8 +143,8 @@ Config files are in `.json` format. Example of such config is shown below:
 
     "score": "max balanced_accuracy",     // mode and metrics used for scoring
     "test_model": true,     // if model is tested after training
+    "debug": false,         // debug model architecture
     "save_dir": "saved/"    // directory of saved reports, models and configs
-
 }
 
 ```
