@@ -5,10 +5,9 @@ from sklearn.metrics import classification_report, mean_absolute_error
 
 class OptimizerClassification(BaseOptimizer):
     def __init__(self, model, data_loader, search_method, scoring, mnt, config):
-        self.model = model
         self.scoring = scoring
         self.mnt = mnt
-        super().__init__(data_loader, search_method, config)
+        super().__init__(model, data_loader, search_method, config)
 
     def fitted_model(self, cor):
         clf_results = cor.cv_results_
@@ -69,10 +68,9 @@ class OptimizerClassification(BaseOptimizer):
 
 class OptimizerRegression(BaseOptimizer):
     def __init__(self, model, data_loader, search_method, scoring, mnt, config):
-        self.model = model
         self.scoring = scoring
         self.mnt = mnt
-        super().__init__(data_loader, search_method, config)
+        super().__init__(model, data_loader, search_method, config)
 
     def fitted_model(self, cor):
         clf_results = cor.cv_results_

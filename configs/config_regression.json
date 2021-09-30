@@ -4,7 +4,9 @@
     "model": {
         "type": "Model",
         "args": {
-            "pipeline": ["scaler", "PCA", "ridge"]
+            "pipeline": ["scaler", "PCA", "ridge"],
+            "unions": {
+            }
         }
     },
 
@@ -50,6 +52,7 @@
 
     "score": "max neg_mean_absolute_error",
     "test_model": true,
+    "debug": false,
     "save_dir": "saved/"
 
 }

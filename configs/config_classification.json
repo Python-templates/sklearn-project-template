@@ -4,7 +4,9 @@
     "model": {
         "type": "Model",
         "args": {
-            "pipeline": ["scaler", "PLS", "pf", "SVC"]
+            "pipeline": ["scaler", "PLS", "pf", "SVC"],
+            "unions": {
+            }
         }
     },
 
@@ -49,6 +51,7 @@
 
     "score": "max balanced_accuracy",
     "test_model": true,
+    "debug": false,
     "save_dir": "saved/"
 
 }

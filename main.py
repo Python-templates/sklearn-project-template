@@ -14,7 +14,7 @@ def main(config):
     data_loader = config.init_obj('data_loader', data_loaders_, **{'training':True})
     model = config.init_obj('model', models_).created_model()
     cross_val = config.init_obj('cross_validation', model_selection_)
-    mnt, scoring = config["score"].split()
+    mnt, scoring = config['score'].split()
 
     search_method_params = {
         'estimator': model,

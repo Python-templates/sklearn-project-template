@@ -36,6 +36,8 @@ class ConfigParser:
         # save updated config file to the checkpoint dir
         write_json(self.config, self.save_dir / 'config.json')
 
+        self._debug = self.config['debug']
+
 
     @classmethod
     def from_args(cls, args, options=''):
@@ -124,6 +126,10 @@ class ConfigParser:
     @property
     def save_dir(self):
         return self._save_dir
+
+    @property
+    def debug(self):
+        return self._debug
 
 # helper functions to update config dict with custom cli options
 def _update_config(config, modification):
