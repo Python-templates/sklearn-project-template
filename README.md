@@ -13,6 +13,7 @@
     For the time being tested open libraries:
   * scikit-learn
   * sktime
+  * tsfresh
 
 ## Getting Started
 
@@ -102,7 +103,7 @@ Config files are in `.json` format. Example of such config is shown below:
         }
     },
 
-    "tuned_parameters":[{   // parameters to be tuned with search method
+    "tuned_parameters":[{   // hyperparameters to be tuned with search method
                         "SVC__kernel": ["rbf"],
                         "SVC__gamma": [1e-5, 1e-6, 1],
                         "SVC__C": [1, 100, 1000],
@@ -168,6 +169,31 @@ methods_dict = {
 }
   ```
 Majority of algorithms implemented in `scikit-learn` library can be directly imported and used. Some algorithms need a little modification before usage. Such an example is Partial least squares (PLS). Modification is implemented in `wrappers/wrappers.py`. In case you want to implement your own method it can be done as well. An example wrapper for Savitzky golay filter is shown in `wrappers/data_transformations.py`. Implementation must satisfy standard method calls, eg. fit(), tranform() etc.
+
+### Unions
+
+Unions concatenates results of multiple transformer methods. Those are applied in parallel to the input data. This is useful if you want to combine several feature mechanisms into a single transformer. For example, if you want to merge results from Principal component analysis (PCA) and Partial least squares (PLS) you can do the following:
+
+```javascript
+"pipeline": ["scaler", "pca-pls", "SVC"],
+"unions": {
+    "pca-pls": ["PLS", "PCA"]
+}
+```
+
+In pipeline you must write self made-up name of a method (in this case `pca-pls`) and then use the same name as a key in unions dictionary. Value to coresponding key must be list of methods (in this case consisting of "PCA" and "PLS"). Hyperparameters which are tuned with a chosen search method must be separated with double underscore (following `scikit-learn` nomenclature). In case you want to tune number of components of both methods you can do the following:
+
+```javascript
+"tuned_parameters":[{
+    "pca-pls__PLS__n_components": [1,2,3],
+    "pca-pls__PCA__n_components": [1,2,3]
+}],
+```
+
+Please refer to `configs/config_unions.json` for unions example.
+### Debug
+
+To debug model architecture set debug flag in config file to `true`. It will print model  by steps with coresponding consecutive outputs produced at each step. Model debugging will only work with `GridSearchCV` search method. In case many parameters are listed to choose from only first ones will be used for evaluation. Debugging is useful in cases when you want to get a sense of what happens at separate step.
 
 ## Customization
 
@@ -274,6 +300,23 @@ number of repeats in cross validation option is `('cross_validation', 'args', 'n
 
   Please refer to `models/models.py` model example.
 
+## Common Questions About Hyperparameter Optimization
+
+### How to Choose Between Random and Grid Search?
+* Choose the method based on your needs. I recommend starting with grid and doing a random search if you have the time.
+* Grid search is appropriate for small and quick searches of hyperparameter values that are known to perform well generally.
+* Random search is appropriate for discovering new hyperparameter values or new combinations of hyperparameters, often resulting in better performance, although it may take more time to complete.
+
+### How to Speed-Up Hyperparameter Optimization?
+* Ensure that you set the “n_jobs” argument to the number of cores on your machine.
+* Evaluate on a smaller sample of your dataset.
+* Explore a smaller search space.
+* Use fewer repeats and/or folds for cross-validation.
+* Execute the search on a faster machine, such as AWS EC2.
+* Use an alternate model that is faster to evaluate.
+
+More on: [machinelearningmastery](https://machinelearningmastery.com/hyperparameter-optimization-with-random-search-and-grid-search/).
+
 ## Roadmap
 
 See [open issues](https://github.com/janezlapajne/sklearn-project-template/issues) to request a feature or report a bug.
@@ -296,6 +339,8 @@ This project is licensed under the MIT License. See  LICENSE for more details.
 
 ## Acknowledgements
 This project is inspired by the project [pytorch-template](https://github.com/victoresque/pytorch-template) by [Victor Huang](https://github.com/victoresque). I would like to confess that some functions, architecture and some parts of readme were directly copied from this repo. But to be honest, what should I do - the project is absolutely amazing!
+
+Additionally, special thanks to the creator of Machine learning mastery, [Jason Brownlee, PhD](https://machinelearningmastery.com/about/) for insightful articles published!
 
 ## Consider supporting
 
