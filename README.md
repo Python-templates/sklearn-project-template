@@ -4,7 +4,7 @@
 ## About the project
 * Folder structure suitable for many machine learning projects. Especially for those with small amount of available training data.
 * `.json` config file support for convenient parameter tuning.
-* Customizable command line options for more convenient parameter tuning.
+* Customizable command line options for more convenient parameter tuning. It supports grid search, random search and bayesian search.
 * Abstract base classes for faster development:
   * `BaseOptimizer` handles execution of grid search, saving and loading of models and formation of test and train reports.
   * `BaseDataLoader` handles splitting of training and testing data. Spilt is performed depending on settings provided in config file.
@@ -49,7 +49,7 @@ python -m pip install -r requirements.txt
   │
   ├── configs/ - holds configuration for training and testing
   │   ├── config_classification.json
-  │   ├── config_regression.json
+  │   └── config_regression.json
   │
   ├── data/ - default directory for storing input data
   │
@@ -68,8 +68,9 @@ python -m pip install -r requirements.txt
   │   └── Regression
   │
   ├── utils/ - utility functions
-  │   └── parse_config.py - class to handle config file and cli options
-  │   ├── utils.py
+  │   ├── parse_config.py - class to handle config file and cli options
+  │   ├── parse_params.py
+  │   └── utils.py
   │
   ├── wrappers/ - wrappers of modified sklearn models or self defined transforms
   │   ├── data_transformations.py
