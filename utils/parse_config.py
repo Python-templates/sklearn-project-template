@@ -4,8 +4,6 @@ from pathlib import Path
 from functools import reduce, partial
 from operator import getitem
 from datetime import datetime
-from sklearn.utils.fixes import loguniform
-from sklearn.experimental import enable_halving_search_cv  # noqa
 from utils import read_json, write_json
 
 
@@ -96,27 +94,6 @@ class ConfigParser:
     def __getitem__(self, name):
         """Access items like ordinary dict."""
         return self.config[name]
-
-    def get_params(self, search_method_params):
-        tuned_parameters = self["tuned_parameters"]
-        search_type = self["search_method"]["type"]
-
-        assert search_type == "GridSearchCV" or \
-                search_type == "RandomizedSearchCV" or \
-                search_type == "HalvingGridSearchCV" or \
-                search_type == "HalvingRandomSearchCV" , \
-                f"Search type {search_type} not supported."
-
-        if "Grid" in search_type:
-            search_method_params['param_grid'] = tuned_parameters
-        else:
-            for method_name in tuned_parameters[0]:
-                if len(tuned_parameters[0][method_name]) == 3 and \
-                        tuned_parameters[0][method_name][0] == 'RS':
-                    temp = tuned_parameters[0][method_name]
-                    tuned_parameters[0][method_name] = loguniform(temp[1], temp[2])
-            search_method_params['param_distributions'] = tuned_parameters
-        return search_method_params
 
     # setting read-only attributes
     @property

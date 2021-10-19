@@ -3,5 +3,5 @@
 
 from .utils import *
 from .parse_config import ConfigParser
-
+from .parse_params import *
 

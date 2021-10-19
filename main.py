@@ -2,7 +2,7 @@ import os
 import glob
 import argparse
 import collections
-from utils import ConfigParser, read_json
+from utils import ConfigParser, read_json, modify_params, get_lib
 import data_loaders.data_loaders as data_loaders_
 import models.models as models_
 import optimizers.optimizers as optimizers_
@@ -21,8 +21,8 @@ def main(config):
         'scoring': scoring,
         'cv': cross_val
     }
-    search_method_params = config.get_params(search_method_params)
-    search_method = config.init_obj('search_method', model_selection_, **search_method_params)
+    search_method_params, search_type = modify_params(search_method_params, config)
+    search_method = config.init_obj('search_method', get_lib(search_type), **search_method_params)
 
     Optimizer = config.import_module('optimizer', optimizers_)
     optim = Optimizer(model=model,
