@@ -8,7 +8,6 @@ from abc import abstractmethod
 class BaseOptimizer():
     def __init__(self, model, data_loader, search_method, config):
         self.X_train, self.y_train = data_loader.get_data()
-        self.X_train, self.y_train = shuffle(self.X_train, self.y_train, random_state=1)
         self.model = model
         self.search_method = search_method
         self.save_dir = config.save_dir
